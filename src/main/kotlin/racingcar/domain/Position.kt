@@ -2,6 +2,8 @@ package racingcar.domain
 
 class Position(initValue: Int = 0) {
 
+    constructor(initPosition: Position) : this(initPosition.value)
+
     private var value: Int
 
     init {
@@ -30,5 +32,9 @@ class Position(initValue: Int = 0) {
 
     override fun hashCode(): Int {
         return value
+    }
+
+    operator fun compareTo(other: Position): Int {
+        return value.compareTo(other.value)
     }
 }

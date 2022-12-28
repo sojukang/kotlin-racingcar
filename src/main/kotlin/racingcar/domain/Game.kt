@@ -27,11 +27,25 @@ class Game(
 
     fun result(): List<Car> = cars
 
+    fun winners(): List<Car> {
+        return cars.filter { it.isSamePosition(winningPosition()) }
+    }
+
+    private fun winningPosition() : Position {
+        var maxPosition = Position(0)
+        for (car in cars) {
+            if (car.position > maxPosition) {
+                maxPosition = Position(car.position)
+            }
+        }
+        return maxPosition
+    }
+
     class RandomConditionNumberGenerator : ConditionNumberGenerator {
 
         private val random = Random
 
         override fun generate(): Int = random.nextInt(0, 10)
     }
-
 }
+

@@ -2,11 +2,13 @@ package racingcar.domain
 
 class Car(name: String) {
 
-    private val movingStrategy: MovingStrategy
+    val name: String
     val position: Position
+    private val movingStrategy: MovingStrategy
 
     init {
         validateName(name)
+        this.name = name
         this.movingStrategy = DefaultMovingStrategy()
         this.position = Position()
     }
@@ -18,6 +20,10 @@ class Car(name: String) {
 
     fun move(number: Int) {
         movingStrategy.move(position, number)
+    }
+
+    fun isSamePosition(otherPosition: Position): Boolean {
+        return position == otherPosition
     }
 
     class DefaultMovingStrategy : MovingStrategy {
