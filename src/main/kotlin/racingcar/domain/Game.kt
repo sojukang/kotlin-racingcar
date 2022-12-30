@@ -20,6 +20,7 @@ class Game(
 
     private fun validateCarNames(carNames: List<String>) {
         require(carNames.isNotEmpty()) { "car names should not be blank" }
+        require(carNames.size == carNames.distinct().count()) { "car names should be unique" }
     }
 
     fun playWithTimes(count: Int): List<List<Car>> {

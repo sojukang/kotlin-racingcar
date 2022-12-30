@@ -12,6 +12,12 @@ class GameTest : ExpectSpec({
                 Game(listOf())
             }
         }
+
+        expect("중복 사용자가 존재할 경우 예외를 던진다.") {
+            shouldThrowWithMessage<IllegalArgumentException>("car names should be unique") {
+                Game(listOf("Forky", "Forky"))
+            }
+        }
     }
 
     context("게임 2회 진행") {

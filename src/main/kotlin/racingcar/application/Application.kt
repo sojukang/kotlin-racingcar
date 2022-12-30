@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
 }
 
 fun initializeGame(): Game = try {
-    UserOutput.requestCarNamesMessage()
+    UserOutput.carNamesRequestMessage()
     Game(UserInput.inputCarNames())
 } catch (e: IllegalArgumentException) {
     println(e.message)
@@ -24,7 +24,7 @@ fun initializeGame(): Game = try {
 }
 
 fun playWithTimes(game: Game): List<List<CarDTO>> = try {
-    UserOutput.requestGameCountMessage()
+    UserOutput.gameCountRequestMessage()
     val count = UserInput.inputGameCount()
     game.playWithTimes(count).map { carsToDTOs(it) }
 } catch (e: IllegalArgumentException) {
