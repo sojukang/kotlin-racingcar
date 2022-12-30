@@ -6,7 +6,10 @@ class Game(
     carNames: List<String>,
     private val conditionNumberGenerator: ConditionNumberGenerator = RandomConditionNumberGenerator()
 ) {
-    private val cars: List<Car>
+    val cars: List<Car>
+        get() {
+            return field.toList()
+        }
 
     init {
         validateCarNames(carNames)
@@ -25,13 +28,11 @@ class Game(
         }
     }
 
-    fun result(): List<Car> = cars
-
     fun winners(): List<Car> {
         return cars.filter { it.isSamePosition(winningPosition()) }
     }
 
-    private fun winningPosition() : Position {
+    private fun winningPosition(): Position {
         var maxPosition = Position(0)
         for (car in cars) {
             if (car.position > maxPosition) {

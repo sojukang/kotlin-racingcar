@@ -4,7 +4,7 @@ class Position(initValue: Int = 0) {
 
     constructor(initPosition: Position) : this(initPosition.value)
 
-    private var value: Int
+    var value: Int private set
 
     init {
         validate(initValue)

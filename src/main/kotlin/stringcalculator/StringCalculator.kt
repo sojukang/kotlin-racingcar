@@ -13,7 +13,7 @@ class StringCalculator {
     }
 
     private fun validateNumbers(numbers: List<Long>) {
-        if (numbers.any{it < 0}) {
+        if (numbers.any { it < 0 }) {
             throw IllegalArgumentException("negative number not allowed")
         }
     }

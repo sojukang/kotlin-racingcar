@@ -19,10 +19,31 @@ class GameTest : ExpectSpec({
         game.play()
 
         expect("첫 번째, 두 번째 자동차는 전진, 세 번째 자동차는 정지한다.") {
-            val result = game.result()
+            val result = game.cars
 
             result[0].position shouldBe Position(1)
             result[1].position shouldBe Position(1)
+            result[2].position shouldBe Position(0)
+        }
+
+        expect("첫 번째, 두 번째 자동차가 우승자이다.") {
+            val winners = game.winners()
+
+            winners[0].name shouldBe "Forky"
+            winners[1].name shouldBe "Quan"
+        }
+    }
+
+    context("게임 2회 진행") {
+        val game = Game(listOf("Forky", "Quan", "YJ"), TestConditionNumberGenerator(listOf(4, 4, 3, 4, 4, 3)))
+        game.play()
+        game.play()
+
+        expect("첫 번째, 두 번째 자동차는 전진, 세 번째 자동차는 정지한다.") {
+            val result = game.cars
+
+            result[0].position shouldBe Position(2)
+            result[1].position shouldBe Position(2)
             result[2].position shouldBe Position(0)
         }
 
