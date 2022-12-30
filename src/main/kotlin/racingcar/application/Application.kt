@@ -9,42 +9,27 @@ import racingcar.ui.UserOutput
 class Application
 
 fun main(args: Array<String>) {
-    // Interactively need user input
-    val game = initialize()
-    val count = requestGameCount()
-
-    // Play and print a result of game
-    val result = play(game, count)
+    val game = initializeGame()
+    val result = playWithTimes(game)
     UserOutput.resultInRacing(result)
     UserOutput.winners(carsToDTOs(game.winners()))
 }
 
-fun initialize(): Game = try {
+fun initializeGame(): Game = try {
     UserOutput.requestCarNamesMessage()
     Game(UserInput.inputCarNames())
-} catch (e: RuntimeException) {
+} catch (e: IllegalArgumentException) {
     println(e.message)
-    initialize()
+    initializeGame()
 }
 
-fun requestGameCount(): Int = try {
+fun playWithTimes(game: Game): List<List<CarDTO>> = try {
     UserOutput.requestGameCountMessage()
-    UserInput.inputGameCount()
-} catch (e: RuntimeException) {
+    val count = UserInput.inputGameCount()
+    game.playWithTimes(count).map { carsToDTOs(it) }
+} catch (e: IllegalArgumentException) {
     println(e.message)
-    requestGameCount()
+    playWithTimes(game)
 }
 
-fun play(game: Game, count: Int): List<List<CarDTO>> {
-    val result = ArrayList<List<CarDTO>>()
-
-    for (i in 1..count) {
-        game.play()
-        result.add(carsToDTOs(game.cars))
-    }
-    return result
-}
-
-fun carsToDTOs(cars: List<Car>): List<CarDTO> {
-    return cars.map { CarDTO(it) }
-}
+fun carsToDTOs(cars: List<Car>): List<CarDTO> = cars.map { CarDTO(it) }

@@ -22,7 +22,21 @@ class Game(
         require(carNames.isNotEmpty()) { "car names should not be blank" }
     }
 
-    fun play() {
+    fun playWithTimes(count: Int): List<List<Car>> {
+        validatePlayCount(count)
+        val result = ArrayList<List<Car>>()
+        for (i in 1..count) {
+            play()
+            result.add(cars)
+        }
+        return result
+    }
+
+    private fun validatePlayCount(count: Int) {
+        require(count > 0) { "game count should be more than one" }
+    }
+
+    private fun play() {
         for (car in cars) {
             car.move(conditionNumberGenerator.generate())
         }
