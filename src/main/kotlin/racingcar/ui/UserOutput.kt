@@ -14,8 +14,9 @@ object UserOutput {
         println("${System.lineSeparator()}실행 결과")
         for (cars in result) {
             for (car in cars) {
-                println("${car.name} : ${"-".repeat(car.position)}${System.lineSeparator()}")
+                println("${car.name} : ${"-".repeat(car.position)}")
             }
+            println()
         }
     }
 

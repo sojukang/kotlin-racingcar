@@ -22,14 +22,8 @@ class GameTest : ExpectSpec({
 
     context("게임 2회 진행") {
         val game = Game(listOf("Forky", "Quan", "YJ"), TestConditionNumberGenerator(listOf(4, 4, 3, 4, 4, 4)))
-
-        expect("진행 횟수가 양수가 아닌 경우 예외를 던진다.") {
-            shouldThrowWithMessage<IllegalArgumentException>("game count should be more than one") {
-                game.playWithTimes(0)
-            }
-        }
-
-        game.playWithTimes(2)
+        game.play()
+        game.play()
 
         expect("첫 번째, 두 번째 자동차는 2 번, 세 번째 자동차는 한 번 전진한다.") {
             val result = game.cars
